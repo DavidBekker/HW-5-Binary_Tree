@@ -6,17 +6,27 @@
 void main()
 {
 	int v;
-	printf("Ensert Value to tree\n");
-	scanf("%d", &v);
 	BST NewTree;
 	initBST(&NewTree);
 
 	while (1)
 	{
-
-		printf("Enter a Value for the tree \n");
+		printf("\nEnter a Value for the tree \n");
 		scanf("%d", &v);
-		insertBST(&NewTree, 5);
+		switch (v)
+		{
+		case 0:
+			printTreeInorder(&NewTree);
+			break;
+		case 1:
+			destroyBST(&NewTree);
+			break;
+		default: insertBST(&NewTree, v);
+			break;
+		}
+
+		
 	}
 
+	
 }

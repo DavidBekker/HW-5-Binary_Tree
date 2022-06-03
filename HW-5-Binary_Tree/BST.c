@@ -25,46 +25,92 @@ TreeNode* createNode()
 	tree->right = NULL;
 	return tree;
 }
-TreeNode* insert(TreeNode* root, TreeNode* newNode)
+insert(TreeNode* root, TreeNode* newNode)
 {
 	
-	TreeNode* headt = root;
-	if (headt == NULL)
-	{
-		//root = newNode;
-		return root;
-	}
 		
-	if (newNode->element <= headt->element)
-		if (headt->left == NULL)//?
+	if (newNode->element <= root->element)
+		if (root->left == NULL)//?
 		{
-			//headt->left = newNode;
-			return headt->left;
+			root->left = newNode;
+			return root->left;
 		}
 			
 		else
-			insert(headt->left, newNode);
+			insert(root->left, newNode);
 
-	if (newNode->element > headt->element) //right subtree (>)
-		if (headt->right == NULL)
+	if (newNode->element > root->element) //right subtree (>)
+		if (root->right == NULL)
 		{
-			//headt->right = newNode;
-			return headt->right;
+			root->right = newNode;
+			return root->right;
 		}
 		
 			else
 		
-				insert(headt->right, newNode);
+				insert(root->right, newNode);
 	
 }
 
 void insertBST(BST* bst, int value)// נדרש לבדוק האם עובד
 {
 	TreeNode* leev=createNode();
-	BST* headt = bst;
 	leev->element = value;
-	TreeNode* temp=insert(headt->root, leev); //לאן
-	leev = temp;
-	
+	if (bst->root == NULL)
+		bst->root = leev;
+	else
+	 insert(bst->root, leev); //לאן
 	
 }
+
+void printTreeInorder(BST* bst)
+{
+	if ((bst->root) != NULL)
+
+		INprintTreeInorder(bst->root);
+	else
+		printf("Tree is Empty\n");
+
+}
+
+void INprintTreeInorder(TreeNode* ToPrint)
+{
+	if ((ToPrint) != NULL)
+	{
+		INprintTreeInorder(ToPrint->left);
+		printf("%d,", ToPrint->element);
+		INprintTreeInorder(ToPrint->right);
+	}
+}
+
+void destroyBST(BST* bst)
+{
+	if ((bst->root) != NULL)
+		INdestroyBST(bst->root);
+	else
+		printf("Tree is Empty\n");
+	
+	initBST(bst);
+	if ((bst->root) == NULL)
+	printf("Tree is Empty\n");
+}
+
+void INdestroyBST(TreeNode* ToFree)
+{
+
+	if ((ToFree->left) != NULL)
+		INdestroyBST(ToFree->left);
+
+	else if ((ToFree->right) != NULL)
+	{
+		INdestroyBST(ToFree->right);
+	}
+	else
+	{
+		return;
+	}
+	free(ToFree);
+	
+}
+
+
