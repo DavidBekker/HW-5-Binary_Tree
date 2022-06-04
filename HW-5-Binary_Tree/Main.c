@@ -1,32 +1,57 @@
-#define _CRT_SECURE_NO_WARNINGS
+﻿#define _CRT_SECURE_NO_WARNINGS
 #include<stdio.h>
 #include"BST.h"
 #include"reePrintLibrary.h"
 
 void main()
 {
-	int v;
+	int ch = 0, key, element=0;
+	char ans= 'n';
 	BST NewTree;
 	initBST(&NewTree);
-
-	while (1)
+	
+	do
 	{
-		printf("\nEnter a Value for the tree \n");
-		scanf("%d", &v);
-		switch (v)
+		printf("\n1.Create");
+		printf("\n2.Search");
+		printf("\n3.Print Tree");
+		printf("\n4.Destroy Tree");
+		printf("\n5.Find index from last");
+		printf("\n6.exit");
+		printf("\nEnter your choice: ");
+		scanf("%d", &ch);
+		switch (ch)
 		{
-		case 0:
+		case 1:
+			
+				printf("Enter new element: \n");
+				scanf("%d", &element);
+				insertBST(&NewTree, element);
+
+				//printf("Enter More element ? : (y/n): \n");
+				//scanf("%c", &ans);
+			
+			break;
+		case 2:
+
+			break;
+
+		case 3:
 			printTreeInorder(&NewTree);
 			break;
-		case 1:
+		case 4:
 			destroyBST(&NewTree);
 			break;
-		default: insertBST(&NewTree, v);
+		case 5:
+			inorder(&NewTree.root);
+
+		default: printf("Invalid Choice try again: \n");
 			break;
 		}
 
+	} while (ch!=6);
+
 		
-	}
 
 	
 }

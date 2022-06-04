@@ -22,4 +22,9 @@ void printTreeInorder(BST* bst);
 void INprintTreeInorder(TreeNode* ToPrint);
 void destroyBST(BST* bst);
 void INdestroyBST(TreeNode* ToFree);
+int findIndexNFromLast(BST* bst, int N);
+TreeNode* search(TreeNode* root, int k);//מחזיר את האיבר שאיתו נסרק העץ
+void inorder(TreeNode* root);//סורקת את העץ
+TreeNode* Maxvalue(TreeNode* node);
+
 #endif // !_BST_ADT_H
