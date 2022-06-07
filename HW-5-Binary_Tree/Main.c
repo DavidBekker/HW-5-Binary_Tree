@@ -5,15 +5,16 @@
 
 void main()
 {
-	int ch = 0, key, element=0;
+	int ch = 0, key, element = 0, ValueOfTree = 0;
 	char ans= 'n';
 	BST NewTree;
+	TreeNode* node;
 	initBST(&NewTree);
 	
 	do
 	{
 		printf("\n1.Create");
-		printf("\n2.Search");
+		printf("\n2.Check if Tree in the same hieght ");
 		printf("\n3.Print Tree");
 		printf("\n4.Destroy Tree");
 		printf("\n5.Find index from last");
@@ -33,18 +34,21 @@ void main()
 			
 			break;
 		case 2:
-
+			if (height(&NewTree.root));
+			printf("a hieght balanced tree\n");
+			
+				printf("Not a hieght balanced tree");
 			break;
-
 		case 3:
+			print_ascii_tree(NewTree.root);
 			printTreeInorder(&NewTree);
 			break;
 		case 4:
 			destroyBST(&NewTree);
 			break;
 		case 5:
-			inorder(&NewTree.root);
-
+			key = findIndexNFromLast(&NewTree, 3);// need update
+			break;
 		default: printf("Invalid Choice try again: \n");
 			break;
 		}

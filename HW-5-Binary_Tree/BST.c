@@ -117,27 +117,20 @@ void INdestroyBST(TreeNode* ToFree)
 
 int findIndexNFromLast(BST* bst, int N)
 {
-	TreeNode* temp = search(bst->root, N);
-	if(temp==NULL)
-	return 0;
+	if (bst->root == NULL)
+		return 0;
+	int highe = height(bst->root);
+	TreeNode* temp= maxinTree(bst->root);
+	int maxelementtree=temp->element;
 	
-}
-void inorder(TreeNode* root)
-{
-	if (root != NULL)
-	{
-		inorder(root->right);
-	}
-}
-TreeNode* Maxvalue(TreeNode* node)
-{
-	TreeNode* current = node;
-	while (current && current->right != NULL)
-		current = current->right;
-	return current;
+	TreeNode* t = scantree(maxelementtree, bst,(highe-N));
+	if (t == NULL)
+		return 0;
+	return t->element;
 }
 TreeNode* search(TreeNode* root, int k)
 {
+	int max=0;
 	int count = 0;
 	TreeNode* temp = root;
 	while (temp != NULL)
@@ -154,3 +147,39 @@ TreeNode* search(TreeNode* root, int k)
 	return NULL;//במידה ולא נמצא אף איבר
 }
 
+TreeNode* maxinTree(TreeNode* bst)
+{
+	TreeNode* temp=bst;
+	if (bst->right != NULL)
+	temp=maxinTree(bst->right);
+	return(temp);
+}
+TreeNode* scantree(int Maxvalue, TreeNode* bst,int index)
+	{
+	TreeNode* temp = NULL;
+	if (index != 0||bst!=NULL||bst->root!=NULL)
+	{
+		if (bst->root->right!=NULL)
+		if (bst->root->right->element < Maxvalue)
+		{
+			temp = scantree(Maxvalue, bst->root->right, --index);
+			if(bst->root->left!=NULL)
+			if (bst->root->left->element <= Maxvalue)
+				temp = scantree(Maxvalue, bst->root->left, --index);
+		}
+
+
+
+	}
+	return temp;
+
+}
+int height(TreeNode* node)
+{
+	if (node == NULL) return 0;
+	return 1 + (maxs(height(node->left), height(node->right)));
+}
+int maxs(int a, int b)
+{
+	return (a >= b) ? a : b;
+}
