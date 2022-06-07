@@ -34,7 +34,7 @@ void main()
 			
 			break;
 		case 2:
-			if (height(&NewTree.root));
+			if (sameHeightLeaves(&NewTree))
 			printf("a hieght balanced tree\n");
 			
 				printf("Not a hieght balanced tree");

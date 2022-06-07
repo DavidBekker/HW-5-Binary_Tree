@@ -154,7 +154,7 @@ TreeNode* maxinTree(TreeNode* bst)
 	temp=maxinTree(bst->right);
 	return(temp);
 }
-TreeNode* scantree(int Maxvalue, TreeNode* bst,int index)
+TreeNode* scantree(int Maxvalue, BST* bst,int index)
 	{
 	TreeNode* temp = NULL;
 	if (index != 0||bst!=NULL||bst->root!=NULL)
@@ -182,4 +182,14 @@ int height(TreeNode* node)
 int maxs(int a, int b)
 {
 	return (a >= b) ? a : b;
+}
+int sameHeightLeaves(BST* bst)
+{
+	if (bst->root == NULL)
+		return 1;
+	int l = height(bst->root->left);
+	int r = height(bst->root->right);
+	if (abs(l - r) <= 1 && sameHeightLeaves(bst->root->left) && sameHeightLeaves(bst->root->right))
+		return 1;
+	return 0;
 }
