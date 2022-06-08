@@ -128,11 +128,7 @@ int findIndexNFromLast(BST* bst, int N)
 	arr = calloc(size, sizeof(int));
 	AddToArry(bst->root, arr, &i);
 
-	for (i = 0; i < size; i++)
-	{
 
-		printf("arr[%d]: %d\n", i, arr[i]);
-	}
 	return arr[size - N];
 
 }
@@ -185,9 +181,4 @@ int sizetree(TreeNode* node)
 		x += sizetree(node->right);
 		return x;
 	}
-}
-
-int compare(const void* a, const void* b)
-{
-	return (*(int*)a - *(int*)b);
 }

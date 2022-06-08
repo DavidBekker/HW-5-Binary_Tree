@@ -6,10 +6,9 @@
 #include <stdlib.h>
 void main()
 {
-	int ch = 0, key, element = 0, ValueOfTree = 0;
+	int ch = 0, key, element;
 	int size, i;
 	int* arr = NULL;
-	char ans= 'n';
 	BST NewTree;
 	TreeNode* node;
 	initBST(&NewTree);
@@ -51,7 +50,8 @@ void main()
 			break;
 		case 5:
 			
-			key = findIndexNFromLast(&NewTree, 3);// need update
+			key = findIndexNFromLast(&NewTree, 3);
+			printf("The Element from Tree after N steps is: %d\n", key);
 			break;
 		default: printf("Invalid Choice try again: \n");
 			break;
