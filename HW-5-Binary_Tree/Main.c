@@ -2,10 +2,13 @@
 #include<stdio.h>
 #include"BST.h"
 #include"reePrintLibrary.h"
-
+#include <assert.h>
+#include <stdlib.h>
 void main()
 {
 	int ch = 0, key, element = 0, ValueOfTree = 0;
+	int size, i;
+	int* arr = NULL;
 	char ans= 'n';
 	BST NewTree;
 	TreeNode* node;
@@ -35,9 +38,9 @@ void main()
 			break;
 		case 2:
 			if (sameHeightLeaves(&NewTree))
-			printf("a hieght balanced tree\n");
-			
-				printf("Not a hieght balanced tree");
+			printf("\na hieght balanced tree\n");
+			else
+				printf("\nNot a hieght balanced tree\n");
 			break;
 		case 3:
 			print_ascii_tree(NewTree.root);
@@ -47,6 +50,7 @@ void main()
 			destroyBST(&NewTree);
 			break;
 		case 5:
+			
 			key = findIndexNFromLast(&NewTree, 3);// need update
 			break;
 		default: printf("Invalid Choice try again: \n");

@@ -1,4 +1,5 @@
-﻿#include<stdio.h>
+﻿#define _CRT_SECURE_NO_WARNINGS
+#include<stdio.h>
 #include"BST.h"
 #include"reePrintLibrary.h"
 #include <assert.h>
@@ -12,9 +13,10 @@ exit(1);\
 }\
 }while(0)
 
+
 void initBST(BST* bst)
 {
-	bst->root= NULL;
+	bst->root = NULL;
 }
 
 TreeNode* createNode()
@@ -28,15 +30,15 @@ TreeNode* createNode()
 }
 insert(TreeNode* root, TreeNode* newNode)
 {
-	
-		
+
+
 	if (newNode->element <= root->element)
 		if (root->left == NULL)//?
 		{
 			root->left = newNode;
 			return root->left;
 		}
-			
+
 		else
 			insert(root->left, newNode);
 
@@ -46,22 +48,22 @@ insert(TreeNode* root, TreeNode* newNode)
 			root->right = newNode;
 			return root->right;
 		}
-		
-			else
-		
-				insert(root->right, newNode);
-	
+
+		else
+
+			insert(root->right, newNode);
+
 }
 
 void insertBST(BST* bst, int value)
 {
-	TreeNode* leev=createNode();
+	TreeNode* leev = createNode();
 	leev->element = value;
 	if (bst->root == NULL)
 		bst->root = leev;
 	else
-	 insert(bst->root, leev); 
-	
+		insert(bst->root, leev);
+
 }
 
 void printTreeInorder(BST* bst)
@@ -82,7 +84,7 @@ void INprintTreeInorder(TreeNode* ToPrint)
 		printf("%d ,", ToPrint->element);
 		INprintTreeInorder(ToPrint->right);
 	}
-	
+
 }
 
 void destroyBST(BST* bst)
@@ -91,10 +93,10 @@ void destroyBST(BST* bst)
 		INdestroyBST(bst->root);
 	else
 		printf("Tree is Empty\n");
-	
+
 	initBST(bst);
 	if ((bst->root) == NULL)
-	printf("Tree is Empty\n");
+		printf("Tree is Empty\n");
 }
 
 void INdestroyBST(TreeNode* ToFree)
@@ -112,73 +114,38 @@ void INdestroyBST(TreeNode* ToFree)
 		return;
 	}
 	free(ToFree);
-	
+
 }
 
 int findIndexNFromLast(BST* bst, int N)
 {
+	int size=0, max=0;
+	int i = 0;
+	int* arr = NULL;
 	if (bst->root == NULL)
 		return 0;
-	int highe = height(bst->root);
-	TreeNode* temp= maxinTree(bst->root);
-	int maxelementtree=temp->element;
-	
-	TreeNode* t = scantree(maxelementtree, bst,(highe-N));
-	if (t == NULL)
-		return 0;
-	return t->element;
-}
-TreeNode* search(TreeNode* root, int k)
-{
-	int max=0;
-	int count = 0;
-	TreeNode* temp = root;
-	while (temp != NULL)
+	size = sizetree(bst->root);
+	arr = calloc(size, sizeof(int));
+	AddToArry(bst->root, arr, &i);
+
+	for (i = 0; i < size; i++)
 	{
-		if (temp->element == k)
-			return(temp);
 
-		if (k > temp->element)
-			temp = temp->right;
-		else
-			temp = temp->left;
-
+		printf("arr[%d]: %d\n", i, arr[i]);
 	}
-	return NULL;//במידה ולא נמצא אף איבר
-}
-
-TreeNode* maxinTree(TreeNode* bst)
-{
-	TreeNode* temp=bst;
-	if (bst->right != NULL)
-	temp=maxinTree(bst->right);
-	return(temp);
-}
-TreeNode* scantree(int Maxvalue, BST* bst,int index)
-	{
-	TreeNode* temp = NULL;
-	if (index != 0||bst!=NULL||bst->root!=NULL)
-	{
-		if (bst->root->right!=NULL)
-		if (bst->root->right->element < Maxvalue)
-		{
-			temp = scantree(Maxvalue, bst->root->right, --index);
-			if(bst->root->left!=NULL)
-			if (bst->root->left->element <= Maxvalue)
-				temp = scantree(Maxvalue, bst->root->left, --index);
-		}
-
-
-
-	}
-	return temp;
+	return arr[size - N];
 
 }
+
+
 int height(TreeNode* node)
 {
 	if (node == NULL) return 0;
 	return 1 + (maxs(height(node->left), height(node->right)));
 }
+
+
+
 int maxs(int a, int b)
 {
 	return (a >= b) ? a : b;
@@ -192,4 +159,35 @@ int sameHeightLeaves(BST* bst)
 	if (abs(l - r) <= 1 && sameHeightLeaves(bst->root->left) && sameHeightLeaves(bst->root->right))
 		return 1;
 	return 0;
+}
+
+
+int AddToArry(TreeNode* node, int arr[], int *i)
+{
+	if (node == NULL)
+		return i;
+
+	arr[*i] = node->element;
+	++* i;
+	AddToArry(node->left, arr, i);
+	AddToArry(node->right, arr, i);
+}
+
+int sizetree(TreeNode* node)
+{
+	int x= 1;
+	if (node == NULL)
+		return 0;
+
+	else
+	{
+		x += sizetree(node->left);
+		x += sizetree(node->right);
+		return x;
+	}
+}
+
+int compare(const void* a, const void* b)
+{
+	return (*(int*)a - *(int*)b);
 }

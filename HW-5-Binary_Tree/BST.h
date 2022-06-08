@@ -32,9 +32,12 @@ void destroyBST(BST* bst);
 void INdestroyBST(TreeNode* ToFree);
 
 //Q5 finde index from last(max):
-TreeNode* scantree(int Maxvalue,BST* bst, int index);//מחזירה את המצביע לערך החדש לאחר הזזה 
-TreeNode* maxinTree(TreeNode* bst);//מחזירה את האלמנט הגדול ביות בעץ
+//TreeNode* maxinTree(TreeNode* bst);//מחזירה את האלמנט הגדול ביות בעץ
 int findIndexNFromLast(BST* bst, int N);
+//Help functions
+int AddToArry(TreeNode* node, int arr[], int i);//מעבירה את כל תוכן העץ לתוך מערך
+int sizetree(TreeNode* node);//מחזירה את גודל העץ
+int compare(const void* a, const void* b);
 
 //Q6 if Same high level:
 int sameHeightLeaves(BST* bst);
